@@ -23,6 +23,7 @@
     "helmet": "^5.0.2",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^2.3.0",
-    "sequelize": "^6.28.1"
+    "sequelize": "^6.28.1",
+    "dayjs": "^1.10.6"
   }
 }
