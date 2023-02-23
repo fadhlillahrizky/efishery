@@ -5,6 +5,8 @@ const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 const routers = require("./routes");
+const NodeCache = require("node-cache");
+const cache = new NodeCache({ stdTTL: 15 })
 
 
 const app = express();
@@ -12,6 +14,10 @@ const app = express();
 
 app.use(cors()); // include before other routes
 app.use(helmet());
+app.use((req, res, next) => {
+    req.nodeCache = cache
+    next()
+})
 
 app.use(
     express.json({

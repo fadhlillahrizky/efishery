@@ -7,7 +7,7 @@ module.exports = class controller {
     }
 
     async list(req, res) {
-        httpResponse(await this.service.list(), res);
+        httpResponse(await this.service.list(req.nodeCache), res);
     }
 
     async aggregate(req, res) {

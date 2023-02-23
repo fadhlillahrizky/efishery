@@ -9,15 +9,21 @@ module.exports = class service {
         this.utility = option?.utility || new Utility();
     }
 
-    async list() {
+    async list(nodeCache) {
         const response = new GenericResponseEntity();
+
+        let usdCurrency =  nodeCache.get('usd');
+        if (!nodeCache.has('usd')) {
+            usdCurrency = (await this.repository.getCurrency())?.data.data?.IDR ?? 1;
+            nodeCache.set('usd', usdCurrency)
+        }
         try {
             const resources = (await this.repository.list());
 
             response.message = "success";
             response.success = true;
             response.data = resources.data.map((resource) => {
-                resource.price_usd = resource.price;
+                resource.price_usd = (parseInt(resource.price) / usdCurrency).toFixed(2);
                 return resource;
             });
             return response;

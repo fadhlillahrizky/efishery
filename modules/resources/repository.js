@@ -1,10 +1,12 @@
 const axios = require("axios");
-const baseUrl = process.env.EFISHERY_BASE_URL ?? "https://stein.efishery.com/v1/";
+const NodeCache = require("node-cache");
 
 module.exports = class service {
     constructor(option) {
         this.axios = option?.axios || axios;
-        this.baseUrl = option?.baseUrl || baseUrl;
+        this.baseUrl = option?.baseUrl || process.env.EFISHERY_BASE_URL;
+        this.baseCurrencyUrl = option?.baseCurrencyUrl || process.env.CURRENCY_BASE_URL;
+        // this.cache = option?.cache || new NodeCache({ stdTTL: 15 });
     }
 
     async list() {
@@ -14,6 +16,12 @@ module.exports = class service {
 
     async get(id) {
         let url = `${this.baseUrl}recruitment/positions/${id}`;
+        return await this.axios.get(url);
+    }
+
+    async getCurrency() {
+        const apiKey = process.env.CURRENCY_API_KEY;
+        let url = `${this.baseCurrencyUrl}?apikey=${apiKey}&currencies=IDR`;
         return await this.axios.get(url);
     }
 }
