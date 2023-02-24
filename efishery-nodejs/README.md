@@ -8,7 +8,7 @@ Dokumen ini menjelaskan langkah-langkah untuk menjalankan service ini.
 * Download dependency `npm install`
 * Copy `.env.example` ke `.env`
 * Sesuaikan isi dari `.env`
-* Untuk menjalankan service API, command-nya adalah `npm run`
+* Untuk menjalankan service API, command-nya adalah `npm start`
 
 ### Postman Collection
 
