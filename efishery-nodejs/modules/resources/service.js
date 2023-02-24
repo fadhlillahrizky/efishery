@@ -36,8 +36,13 @@ module.exports = class service {
 
     }
 
-    async aggregate() {
+    async aggregate(user) {
         const response = new GenericResponseEntity();
+        if (user.role !== "admin") {
+            response.statusCode = 401;
+            response.message = "Only admin role";
+            return response;
+        }
 
         try {
             const resources = await this.repository.list();

@@ -14,11 +14,6 @@ module.exports = class service {
         return await this.axios.get(url);
     }
 
-    async get(id) {
-        let url = `${this.baseUrl}recruitment/positions/${id}`;
-        return await this.axios.get(url);
-    }
-
     async getCurrency() {
         const apiKey = process.env.CURRENCY_API_KEY;
         let url = `${this.baseCurrencyUrl}?apikey=${apiKey}&currencies=IDR`;

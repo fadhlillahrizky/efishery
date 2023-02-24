@@ -11,6 +11,6 @@ module.exports = class controller {
     }
 
     async aggregate(req, res) {
-        httpResponse(await this.service.aggregate(), res);
+        httpResponse(await this.service.aggregate(req.user), res);
     }
 }
